@@ -2,5 +2,6 @@ services:
   find-min:
     ports:
       - "8080:8080"
+    build: .
     image: comfort-soft-test
     container_name: comfort-soft-test
