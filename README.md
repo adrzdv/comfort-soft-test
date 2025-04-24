@@ -10,6 +10,7 @@
 
 - Java 21+
 - Maven 3+
+- Spring Boot 3.3.2
 
 #### Команды:
 
