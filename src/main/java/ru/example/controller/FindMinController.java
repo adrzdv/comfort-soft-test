@@ -2,6 +2,9 @@ package ru.example.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +20,18 @@ public class FindMinController {
     ParseFile fileParser;
 
     @GetMapping
-    @Operation(summary = "Найти N-ое минимальное число в Excel-файле")
+    @Operation(summary = "Найти N-ое минимальное число в Excel-файле",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            content = @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = Integer.class))
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Internal Server Error"
+                    )
+            })
     public int findMin(@RequestParam
                        @Parameter(
                                description = "Путь к локальному Excel-файлу (формат .xlsx)",
@@ -26,7 +40,7 @@ public class FindMinController {
                        String src,
                        @RequestParam
                        @Parameter(
-                               description = "Номер по порядку минимального числа (например, 3 — значит третье по возрастанию)",
+                               description = "Номер по порядку минимального числа",
                                example = "3"
                        )
                        int n) {

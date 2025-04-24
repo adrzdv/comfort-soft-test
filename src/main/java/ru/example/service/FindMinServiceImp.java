@@ -15,8 +15,8 @@ public class FindMinServiceImp implements FindMinService {
 
         if (list.size() > 1) {
             pivot = list.get(list.size() / 2);
-        } else if (n > list.size()) {
-            throw new IllegalArgumentException("N can't be more than size of entry list");
+        } else if (n < 1 || n > list.size()) {
+            throw new IllegalArgumentException("N must be between 1 and the size of the list");
         } else {
             return list.get(0);
         }
